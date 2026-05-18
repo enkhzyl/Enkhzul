@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1777748889487,
+    "name": "hulan",
+    "email": "hulan@gmail.com",
+    "password_hash": "$2a$10$w.FL2cC9kYLWZHjjcvd7R.1unmb8Oiwt/xE7diE2X7ao/ZkwrPsw6"
+  },
+  {
+    "id": 1777748976436,
+    "name": "huslee",
+    "email": "huslee@gmail.com",
+    "password_hash": "$2a$10$21FCjYMujJFWpMw4IRGo8e6VfQz3fgdNJFnpJC6Q37DoBy4OtjEm6"
+  },
+  {
+    "id": 1777750195081,
+    "name": "nomio",
+    "email": "nomio@gmail.com",
+    "password_hash": "$2a$10$HqWnBlAnEYE.ntRqypJNj.ZlWvcv7647HfIoJLTxWKgiSzp8f0X8i"
+  }
+]

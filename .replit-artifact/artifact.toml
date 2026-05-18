@@ -1,0 +1,13 @@
+kind = "web"
+previewPath = "/food-v0"
+title = "Food Ordering (old)"
+version = "1.0.0"
+id = "food-ordering"
+
+[[services]]
+localPort = 3000
+name = "Food Ordering"
+paths = ["/food-v0"]
+
+[services.development]
+run = "cd /home/runner/workspace/food-ordering && PORT=3000 pnpm run dev"

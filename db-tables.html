@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8" />
+  <title>Өгөгдлийн ерөнхий схем — FastFood</title>
+  <style>
+    body {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 14px;
+      margin: 60px auto;
+      max-width: 820px;
+      color: #000;
+      background: #fff;
+    }
+    h2 {
+      text-align: center;
+      font-size: 15px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+      margin: 32px 0 4px 0;
+    }
+    .table-caption {
+      text-align: right;
+      font-size: 13px;
+      margin-bottom: 2px;
+      font-style: italic;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 10px;
+    }
+    th {
+      border: 1px solid #000;
+      background: #d9d9d9;
+      padding: 5px 8px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: bold;
+    }
+    td {
+      border: 1px solid #000;
+      padding: 4px 8px;
+      font-size: 13px;
+    }
+    td.center { text-align: center; }
+    td.pk { font-weight: bold; color: #c00000; }
+    td.fk { font-weight: bold; color: #1f3864; }
+    @media print {
+      body { margin: 20mm; }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Зураг 6. Өгөгдлийн ерөнхий схем</h2>
+  <p style="text-align:center; font-size:13px; margin-top:0;">ӨЕС өргөтгөл</p>
+
+  <!-- ══════════════════════════════ -->
+  <!-- 1. Хэрэглэгч (User)           -->
+  <!-- ══════════════════════════════ -->
+  <div class="table-caption">Хүснэгт 1. Хэрэглэгч (User)</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Баганын нэр</th>
+        <th>ӨС нэр</th>
+        <th>Түлхүүр</th>
+        <th>Төрөл</th>
+        <th>Тайлбар</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>id</td>
+        <td>UserID</td>
+        <td class="center pk">PK</td>
+        <td class="center">integer</td>
+        <td>Хэрэглэгчийн дахин давтагдашгүй дугаар</td>
+      </tr>
+      <tr>
+        <td>нэр</td>
+        <td>UserName</td>
+        <td></td>
+        <td class="center">varchar(100)</td>
+        <td>Хэрэглэгчийн бүртгэлтэй нэр</td>
+      </tr>
+      <tr>
+        <td>имэйл</td>
+        <td>Email</td>
+        <td></td>
+        <td class="center">varchar(150)</td>
+        <td>Нэвтрэхэд ашиглах имэйл хаяг</td>
+      </tr>
+      <tr>
+        <td>нууц_үг</td>
+        <td>Password</td>
+        <td></td>
+        <td class="center">text</td>
+        <td>Нэвтрэх нууц үг (hash)</td>
+      </tr>
+      <tr>
+        <td>утас</td>
+        <td>Phone</td>
+        <td></td>
+        <td class="center">varchar(20)</td>
+        <td>Хэрэглэгчийн утасны дугаар</td>
+      </tr>
+      <tr>
+        <td>эрх</td>
+        <td>Role</td>
+        <td></td>
+        <td class="center">varchar(10)</td>
+        <td>user / admin төрлийн эрх</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ══════════════════════════════ -->
+  <!-- 2. Хаяг (Address)             -->
+  <!-- ══════════════════════════════ -->
+  <div class="table-caption">Хүснэгт 2. Хаяг (Address)</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Баганын нэр</th>
+        <th>ӨС нэр</th>
+        <th>Түлхүүр</th>
+        <th>Төрөл</th>
+        <th>Тайлбар</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>id</td>
+        <td>AddressID</td>
+        <td class="center pk">PK</td>
+        <td class="center">integer</td>
+        <td>Хаягийн дахин давтагдашгүй дугаар</td>
+      </tr>
+      <tr>
+        <td>хэрэглэгч_id</td>
+        <td>UserID</td>
+        <td class="center fk">FK</td>
+        <td class="center">integer</td>
+        <td>Аль хэрэглэгчийн хаяг болохыг илэрхийлнэ</td>
+      </tr>
+      <tr>
+        <td>хаяг</td>
+        <td>Address</td>
+        <td></td>
+        <td class="center">text</td>
+        <td>Дэлгэрэнгүй хаяг</td>
+      </tr>
+      <tr>
+        <td>дүүрэг</td>
+        <td>District</td>
+        <td></td>
+        <td class="center">varchar(100)</td>
+        <td>Хамаарах дүүрэг</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ══════════════════════════════ -->
+  <!-- 3. Захиалга (Order)           -->
+  <!-- ══════════════════════════════ -->
+  <div class="table-caption">Хүснэгт 3. Захиалга (Order)</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Баганын нэр</th>
+        <th>ӨС нэр</th>
+        <th>Түлхүүр</th>
+        <th>Төрөл</th>
+        <th>Тайлбар</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>id</td>
+        <td>OrderID</td>
+        <td class="center pk">PK</td>
+        <td class="center">integer</td>
+        <td>Захиалгын дахин давтагдашгүй дугаар</td>
+      </tr>
+      <tr>
+        <td>хэрэглэгч_id</td>
+        <td>UserID</td>
+        <td class="center fk">FK</td>
+        <td class="center">integer</td>
+        <td>Захиалга өгсөн хэрэглэгч</td>
+      </tr>
+      <tr>
+        <td>нийт_үнэ</td>
+        <td>TotalPrice</td>
+        <td></td>
+        <td class="center">decimal(10,2)</td>
+        <td>Захиалгын нийт төлбөр</td>
+      </tr>
+      <tr>
+        <td>хаяг</td>
+        <td>DeliveryAddress</td>
+        <td></td>
+        <td class="center">text</td>
+        <td>Хүргэлтийн хаяг</td>
+      </tr>
+      <tr>
+        <td>төлөв</td>
+        <td>Status</td>
+        <td></td>
+        <td class="center">varchar(50)</td>
+        <td>Хүлээгдэж буй / Хүргэгдсэн / Цуцлагдсан</td>
+      </tr>
+      <tr>
+        <td>огноо</td>
+        <td>CreatedAt</td>
+        <td></td>
+        <td class="center">timestamp</td>
+        <td>Захиалга өгсөн огноо цаг</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ══════════════════════════════ -->
+  <!-- 4. Сагс (Cart)                -->
+  <!-- ══════════════════════════════ -->
+  <div class="table-caption">Хүснэгт 4. Сагс (Cart)</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Баганын нэр</th>
+        <th>ӨС нэр</th>
+        <th>Түлхүүр</th>
+        <th>Төрөл</th>
+        <th>Тайлбар</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>id</td>
+        <td>CartID</td>
+        <td class="center pk">PK</td>
+        <td class="center">integer</td>
+        <td>Сагсны бичлэгийн дахин давтагдашгүй дугаар</td>
+      </tr>
+      <tr>
+        <td>хэрэглэгч_id</td>
+        <td>UserID</td>
+        <td class="center fk">FK</td>
+        <td class="center">integer</td>
+        <td>Сагсанд нэмсэн хэрэглэгч</td>
+      </tr>
+      <tr>
+        <td>меню_хоол_id</td>
+        <td>MenuItemID</td>
+        <td class="center fk">FK</td>
+        <td class="center">integer</td>
+        <td>Сагсанд нэмэгдсэн меню хоол</td>
+      </tr>
+      <tr>
+        <td>тоо_ширхэг</td>
+        <td>Quantity</td>
+        <td></td>
+        <td class="center">integer</td>
+        <td>Захиалсан тоо ширхэг</td>
+      </tr>
+      <tr>
+        <td>нэмэлт_орц</td>
+        <td>Extras</td>
+        <td></td>
+        <td class="center">json</td>
+        <td>Хэрэглэгчийн сонгосон нэмэлт орцууд</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ══════════════════════════════ -->
+  <!-- 5. Ангилал (Category)         -->
+  <!-- ══════════════════════════════ -->
+  <div class="table-caption">Хүснэгт 5. Ангилал (Category)</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Баганын нэр</th>
+        <th>ӨС нэр</th>
+        <th>Түлхүүр</th>
+        <th>Төрөл</th>
+        <th>Тайлбар</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>id</td>
+        <td>CategoryID</td>
+        <td class="center pk">PK</td>
+        <td class="center">integer</td>
+        <td>Ангиллын дахин давтагдашгүй дугаар</td>
+      </tr>
+      <tr>
+        <td>нэр</td>
+        <td>CategoryName</td>
+        <td></td>
+        <td class="center">varchar(100)</td>
+        <td>Ангиллын нэр (Бургер, Пицца гэх мэт)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ══════════════════════════════ -->
+  <!-- 6. Меню хоол (Menu Item)      -->
+  <!-- ══════════════════════════════ -->
+  <div class="table-caption">Хүснэгт 6. Меню хоол (Menu Item)</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Баганын нэр</th>
+        <th>ӨС нэр</th>
+        <th>Түлхүүр</th>
+        <th>Төрөл</th>
+        <th>Тайлбар</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>id</td>
+        <td>MenuItemID</td>
+        <td class="center pk">PK</td>
+        <td class="center">integer</td>
+        <td>Меню хоолны дахин давтагдашгүй дугаар</td>
+      </tr>
+      <tr>
+        <td>ангилал_id</td>
+        <td>CategoryID</td>
+        <td class="center fk">FK</td>
+        <td class="center">integer</td>
+        <td>Хамаарах ангилал</td>
+      </tr>
+      <tr>
+        <td>нэр</td>
+        <td>ItemName</td>
+        <td></td>
+        <td class="center">varchar(200)</td>
+        <td>Хоолны нэр</td>
+      </tr>
+      <tr>
+        <td>үндсэн_үнэ</td>
+        <td>BasePrice</td>
+        <td></td>
+        <td class="center">decimal(10,2)</td>
+        <td>Үндсэн үнэ (төгрөгөөр)</td>
+      </tr>
+      <tr>
+        <td>үндсэн_калори</td>
+        <td>BaseCalories</td>
+        <td></td>
+        <td class="center">integer</td>
+        <td>Үндсэн калорийн тоо (kcal)</td>
+      </tr>
+      <tr>
+        <td>тайлбар</td>
+        <td>Description</td>
+        <td></td>
+        <td class="center">text</td>
+        <td>Хоолны дэлгэрэнгүй тайлбар</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ══════════════════════════════ -->
+  <!-- 7. Орц (Ingredient)           -->
+  <!-- ══════════════════════════════ -->
+  <div class="table-caption">Хүснэгт 7. Орц (Ingredient)</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Баганын нэр</th>
+        <th>ӨС нэр</th>
+        <th>Түлхүүр</th>
+        <th>Төрөл</th>
+        <th>Тайлбар</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>id</td>
+        <td>IngredientID</td>
+        <td class="center pk">PK</td>
+        <td class="center">integer</td>
+        <td>Орцны дахин давтагдашгүй дугаар</td>
+      </tr>
+      <tr>
+        <td>меню_хоол_id</td>
+        <td>MenuItemID</td>
+        <td class="center fk">FK</td>
+        <td class="center">integer</td>
+        <td>Аль меню хоолны орц болохыг илэрхийлнэ</td>
+      </tr>
+      <tr>
+        <td>нэр</td>
+        <td>IngredientName</td>
+        <td></td>
+        <td class="center">varchar(100)</td>
+        <td>Орцны нэр</td>
+      </tr>
+      <tr>
+        <td>нэмэлт_үнэ</td>
+        <td>ExtraPrice</td>
+        <td></td>
+        <td class="center">decimal(10,2)</td>
+        <td>Орц нэмэхэд нэмэгдэх үнэ</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ══════════════════════════════ -->
+  <!-- 8. Захиалгын түүх (History)   -->
+  <!-- ══════════════════════════════ -->
+  <div class="table-caption">Хүснэгт 8. Захиалгын түүх (History)</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Баганын нэр</th>
+        <th>ӨС нэр</th>
+        <th>Түлхүүр</th>
+        <th>Төрөл</th>
+        <th>Тайлбар</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>id</td>
+        <td>HistoryID</td>
+        <td class="center pk">PK</td>
+        <td class="center">integer</td>
+        <td>Түүхийн бичлэгийн дахин давтагдашгүй дугаар</td>
+      </tr>
+      <tr>
+        <td>хэрэглэгч_id</td>
+        <td>UserID</td>
+        <td class="center fk">FK</td>
+        <td class="center">integer</td>
+        <td>Үйлдэл хийсэн хэрэглэгч</td>
+      </tr>
+      <tr>
+        <td>захиалга_id</td>
+        <td>OrderID</td>
+        <td class="center fk">FK</td>
+        <td class="center">integer</td>
+        <td>Ямар захиалгатай холбоотой үйлдэл</td>
+      </tr>
+      <tr>
+        <td>үйлдэл</td>
+        <td>Action</td>
+        <td></td>
+        <td class="center">varchar(100)</td>
+        <td>Захиалга өгөх, цуцлах, хүлээн авах үйлдэл</td>
+      </tr>
+      <tr>
+        <td>огноо</td>
+        <td>CreatedAt</td>
+        <td></td>
+        <td class="center">timestamp</td>
+        <td>Үйлдлийн огноо цаг</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>
